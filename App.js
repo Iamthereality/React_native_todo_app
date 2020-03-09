@@ -1,30 +1,46 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Navbar } from "./src/Navbar";
-import { AddNewTask } from "./src/AddNewTask";
-import { Tasks } from "./src/Tasks";
+import { StyleSheet, View } from 'react-native';
+import { Navbar } from "./src/Components/Navbar";
+import { MainScreen } from "./src/Screens/MainScreen";
+import { TaskScreen } from "./src/Screens/TaskScreen";
 
 export default function App() {
+    const [taskID, setTaskID] = useState(null);
     const [tasks, setTasks] = useState([]);
 
     const addTask = (title) => {
-        setTasks(prevTasks => [
-            ...prevTasks,
+        setTasks((prevState) => [
+            ...prevState,
             {
                 id:Date.now().toString(),
                 title
             }
-        ])
+        ]);
     };
 
+    const removeTask = (id) => {
+        setTasks(prevState => prevState.filter(task => task.id !== id));
+    };
+
+    let content = (
+        <MainScreen tasks={ tasks }
+                    addTask={ addTask }
+                    removeTask={ removeTask }
+                    openTask={ setTaskID }
+        />
+    );
+
+    if (taskID) {
+        content = (
+            <TaskScreen backToTasksList={ setTaskID }/>
+        )
+    }
+
     return (
-        <View>
-            <Navbar title={ `Todo Application` }/>
-            <View style={ styles.container }>
-                <AddNewTask onSubmit={ addTask }/>
-                <Tasks tasks={ tasks }/>
-            </View>
-        </View>
+        <>
+            <Navbar title={ `Todo App` }/>
+            { content }
+        </>
     );
 }
 

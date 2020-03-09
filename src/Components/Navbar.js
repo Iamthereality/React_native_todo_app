@@ -5,7 +5,9 @@ export const Navbar = (props) => {
     const { title } = props;
     return (
         <View style={ styles.navbar }>
-            <Text style={ styles.text }>{ title }</Text>
+            <Text style={ styles.text }>
+                { title }
+            </Text>
         </View>
     );
 };
@@ -16,7 +18,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         height: 70,
-        paddingTop: 20
+        paddingTop: 20,
+        marginBottom: 10
     },
     text: {
         color: 'white',
