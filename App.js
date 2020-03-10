@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
 import { StyleSheet, Alert } from 'react-native';
+import * as Font from 'expo-font';
+import { AppLoading } from "expo";
+
 import { Navbar } from "./src/Components/Navbar";
 import { MainScreen } from "./src/Screens/MainScreen";
 import { TaskScreen } from "./src/Screens/TaskScreen";
 
+async function load_application() {
+    await Font.loadAsync({
+        roboto_bold: require('./assets/fonts/Roboto-Bold.ttf'),
+        roboto_regular: require('./assets/fonts/Roboto-Regular.ttf'),
+        roboto_thin: require('./assets/fonts/Roboto-Thin.ttf')
+    })
+}
+
 export default function App() {
+    const [isReady, setIsReady] = useState(false);
     const [taskID, setTaskID] = useState(null);
-    const [tasks, setTasks] = useState([
-        // { id: '1', title: 'learn React Native' },
-        // { id: '2', title: 'Build crypto app' }
-    ]);
+    const [tasks, setTasks] = useState([]);
+
+    if (!isReady) {
+        return (
+        <AppLoading startAsync={ load_application }
+                    onError={ (error) => console.log(error) }
+                    onFinish={() => setIsReady(true)}
+        />
+        );
+    }
 
     const addTask = (title) => {
         setTasks((prevState) => [
