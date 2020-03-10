@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native'
+import { THEME } from "../Theme";
 
-export const Navbar = (props) => {
-    const { title } = props;
+export const Navbar = ({ title }) => {
     return (
         <View style={ styles.navbar }>
             <Text style={ styles.text }>
@@ -14,7 +14,7 @@ export const Navbar = (props) => {
 
 const styles = StyleSheet.create({
     navbar: {
-        backgroundColor: '#3949ab',
+        backgroundColor: THEME.MAIN_COLOR,
         alignItems: 'center',
         justifyContent: 'center',
         height: 70,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     text: {
-        color: 'white',
+        color: THEME.FONT_COLOR,
         fontSize: 20
     }
 });

@@ -1,34 +1,31 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {AppCard} from "./UI/AppCard";
 
-export const Tasks = (props) => {
-    const { task, onRemove, onOpen } = props;
+export const Tasks = ({ task, onRemove, onOpen }) => {
     return (
-        <TouchableOpacity activeOpacity={ 0.5 }
+        <TouchableOpacity activeOpacity={ 0.9 }
                           onPress={ () => onOpen(task.id) }
                           onLongPress={ () => onRemove(task.id) }
+                          style={ styles.task }
         >
-            <View style={ styles.task }>
+            <AppCard>
                 <Text style={ styles.text }>
                     { task.title }
                 </Text>
-            </View>
+            </AppCard>
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     task: {
-        borderWidth: 1,
-        borderColor: '#3949ab',
         marginTop: 10,
         marginBottom: 10,
         borderRadius: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
         minHeight: 40,
-        height: 'auto'
+        height: 'auto',
+        paddingHorizontal: 5
     },
     text: {
         alignItems: 'center',

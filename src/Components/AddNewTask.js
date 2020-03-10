@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
+import { THEME } from "../Theme";
 
-export const AddNewTask = (props) => {
+export const AddNewTask = ({ onSubmit }) => {
     const [value, setValue] = useState('');
-
-    const { onSubmit } = props;
 
     const pressHandler = () => {
         if (value.trim()) {
@@ -51,7 +50,7 @@ const styles = StyleSheet.create({
     input: {
         width: '65%',
         borderBottomWidth: 2,
-        borderBottomColor: '#3949ab',
+        borderBottomColor: THEME.MAIN_COLOR,
         marginRight: 5,
         padding: 5
     },
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
         width: '30%',
         borderRadius: 10,
         height: 40,
-        backgroundColor: '#3949ab',
+        backgroundColor: THEME.MAIN_COLOR,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         textAlign: 'center',
-        color: '#fff',
+        color: THEME.FONT_COLOR,
         fontSize: 16
     }
 });
