@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, Modal, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, StyleSheet, TextInput, Modal, Alert, Keyboard } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+
 import { THEME } from "../Theme";
+import { AppTextThin } from "./UI/AppTextThin";
+import { AppButton } from './UI/AppButton';
 
 export const EditTaskModalWindow = ({ visibility, onCancel, value, onSave }) => {
     const [title, setTitle] = useState(value);
@@ -13,6 +17,7 @@ export const EditTaskModalWindow = ({ visibility, onCancel, value, onSave }) => 
             );
         } else {
             onSave(title);
+            Keyboard.dismiss();
         }
     };
 
@@ -23,9 +28,9 @@ export const EditTaskModalWindow = ({ visibility, onCancel, value, onSave }) => 
         >
             <View style={ styles.modal_window }>
                 <View style={ styles.input_field }>
-                    <Text style={ styles.input_field_header }>
+                    <AppTextThin style={ styles.input_field_header }>
                         { 'Change the task title:' }
-                    </Text>
+                    </AppTextThin>
                     <TextInput style={ styles.input }
                                autoCapitalize={ 'none' }
                                autocorrect={ 'false' }
@@ -34,33 +39,22 @@ export const EditTaskModalWindow = ({ visibility, onCancel, value, onSave }) => 
                     />
                 </View>
                 <View style={ styles.buttons_container }>
-                    <TouchableOpacity style={ styles.cancel_button }
-                                      onPress={ onCancel }
-                                      activeOpacity={ 0.7 }
+                    <AppButton buttonStyle={styles.cancel_button }
+                               textStyle={ styles.text }
+                               onPress={ onCancel }
                     >
-                        <Text style={ styles.text }>
-                            { 'Cancel' }
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={ styles.save_button }
-                                      onPress={ saveHandler }
-                                      activeOpacity={ 0.7 }
+                        <AntDesign name={ 'back' } size={ 25 }/>
+                    </AppButton>
+                    <AppButton  buttonStyle={ styles.save_button }
+                                textStyle={ styles.text }
+                                onPress={ saveHandler }
                     >
-                        <Text style={ styles.text }>
-                            { 'Save' }
-                        </Text>
-                    </TouchableOpacity>
+                        <AntDesign name={ 'save' } size={ 25 }/>
+                    </AppButton>
                 </View>
             </View>
         </Modal>
     );
-};
-
-const button = {
-    borderRadius: 10,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center'
 };
 
 const styles = StyleSheet.create({
@@ -88,12 +82,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     input_field_header: {
-        fontSize: 20
+        fontSize: 26,
+        color: THEME.BLACK_COLOR
     },
     input: {
         width: '100%',
         borderBottomWidth: 2,
-        borderBottomColor: THEME.MAIN_COLOR
+        borderBottomColor: THEME.MAIN_COLOR,
+        marginVertical: 20
     },
     buttons_container: {
         width: '100%',
@@ -104,18 +100,13 @@ const styles = StyleSheet.create({
     },
     cancel_button: {
         width: '45%',
-        backgroundColor: THEME.RED_COLOR,
-        ...button
+        backgroundColor: THEME.RED_COLOR
     },
     save_button: {
         width: '45%',
-        backgroundColor: THEME.MAIN_COLOR,
-        ...button
+        backgroundColor: THEME.MAIN_COLOR
     },
     text: {
-        paddingLeft: 10,
-        paddingRight: 10,
-        textAlign: 'center',
         color: THEME.FONT_COLOR,
         fontSize: 16
     }

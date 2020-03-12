@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TextInput, TouchableOpacity, Text, Alert } from 'react-native';
+import { View, StyleSheet, TextInput, Alert, Keyboard } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+
 import { THEME } from "../Theme";
+import { AppButton } from './UI/AppButton';
 
 export const AddNewTask = ({ onSubmit }) => {
     const [value, setValue] = useState('');
@@ -9,6 +12,7 @@ export const AddNewTask = ({ onSubmit }) => {
         if (value.trim()) {
             onSubmit(value);
             setValue('');
+            Keyboard.dismiss();
         } else {
             Alert.alert('There is no task name');
         }
@@ -27,14 +31,12 @@ export const AddNewTask = ({ onSubmit }) => {
                        autoCorrect={ false }
                        autoCapitalized={ 'none' }
             />
-            <TouchableOpacity style={ styles.button }
-                              onPress={ pressHandler }
-                              activeOpacity={ 0.7 }
+            <AppButton  buttonStyle={ styles.button }
+                        textStyle={ styles.text }
+                        onPress={ pressHandler }
             >
-                <Text style={ styles.text }>
-                    { 'Add  task' }
-                </Text>
-            </TouchableOpacity>
+                <AntDesign name={ 'pluscircleo' } size={ 25 } style={ styles.text }/>
+            </AppButton>
         </View>
     );
 };
@@ -42,7 +44,7 @@ export const AddNewTask = ({ onSubmit }) => {
 const styles = StyleSheet.create({
     form: {
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-end',
         justifyContent: 'space-between',
         marginBottom: 10,
         paddingHorizontal: 10
@@ -55,18 +57,9 @@ const styles = StyleSheet.create({
         padding: 5
     },
     button: {
-        width: '30%',
-        borderRadius: 10,
-        height: 40,
-        backgroundColor: THEME.MAIN_COLOR,
-        alignItems: 'center',
-        justifyContent: 'center'
+        width: '30%'
     },
     text: {
-        paddingLeft: 10,
-        paddingRight: 10,
-        textAlign: 'center',
-        color: THEME.FONT_COLOR,
-        fontSize: 16
+        textAlign: 'center'
     }
 });

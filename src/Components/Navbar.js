@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native'
+import { View,  StyleSheet } from 'react-native'
+
 import { THEME } from "../Theme";
+import {AppTextThin} from "./UI/AppTextThin";
 
 export const Navbar = ({ title }) => {
     return (
         <View style={ styles.navbar }>
-            <Text style={ styles.text }>
+            <AppTextThin style={ styles.text }>
                 { title }
-            </Text>
+            </AppTextThin>
         </View>
     );
 };

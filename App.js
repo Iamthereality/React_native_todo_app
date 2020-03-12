@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Alert } from 'react-native';
+import { Alert } from 'react-native';
+
 import * as Font from 'expo-font';
 import { AppLoading } from "expo";
 
@@ -9,9 +10,9 @@ import { TaskScreen } from "./src/Screens/TaskScreen";
 
 async function load_application() {
     await Font.loadAsync({
-        roboto_bold: require('./assets/fonts/Roboto-Bold.ttf'),
-        roboto_regular: require('./assets/fonts/Roboto-Regular.ttf'),
-        roboto_thin: require('./assets/fonts/Roboto-Thin.ttf')
+        'roboto-bold': require('./assets/fonts/Roboto-Bold.ttf'),
+        'roboto-regular': require('./assets/fonts/Roboto-Regular.ttf'),
+        'roboto-thin': require('./assets/fonts/Roboto-Thin.ttf')
     })
 }
 
@@ -22,10 +23,10 @@ export default function App() {
 
     if (!isReady) {
         return (
-        <AppLoading startAsync={ load_application }
-                    onError={ (error) => console.log(error) }
-                    onFinish={() => setIsReady(true)}
-        />
+            <AppLoading startAsync={ load_application }
+                        onError={ (error) => console.log(error) }
+                        onFinish={() => setIsReady(true)}
+            />
         );
     }
 
@@ -97,10 +98,3 @@ export default function App() {
         </>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: 10,
-        paddingVertical: 10
-    }
-});

@@ -1,6 +1,8 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity } from 'react-native';
-import {AppCard} from "./UI/AppCard";
+import { StyleSheet, TouchableOpacity } from 'react-native';
+
+import { AppCard } from "./UI/AppCard";
+import {AppTextRegular} from "./UI/AppTextRegular";
 
 export const Tasks = ({ task, onRemove, onOpen }) => {
     return (
@@ -10,9 +12,9 @@ export const Tasks = ({ task, onRemove, onOpen }) => {
                           style={ styles.task }
         >
             <AppCard>
-                <Text style={ styles.text }>
+                <AppTextRegular style={ styles.text }>
                     { task.title }
-                </Text>
+                </AppTextRegular>
             </AppCard>
         </TouchableOpacity>
     );

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
+
 import { THEME } from '../Theme';
 import { AppCard } from '../Components/UI/AppCard'
 import { EditTaskModalWindow } from "../Components/EditTaskModalWindow";
+import { AppTextRegular } from "../Components/UI/AppTextRegular";
+import { AppButton } from '../Components/UI/AppButton';
 
 export const TaskScreen = ({ backToTasksList, task, removeTask, onSave }) => {
     const [modalWindow, setModal] = useState(false);
@@ -10,7 +14,7 @@ export const TaskScreen = ({ backToTasksList, task, removeTask, onSave }) => {
     const saveHandler = (title) => {
         onSave(task.id, title);
         setModal(false);
-    }
+    };
 
     return (
         <View style={ styles.task_details }>
@@ -21,49 +25,35 @@ export const TaskScreen = ({ backToTasksList, task, removeTask, onSave }) => {
             />
             <AppCard>
                 <View style={ styles.task_title }>
-                    <Text style={ styles.title }>
+                    <AppTextRegular style={ styles.title }>
                         { task.title }
-                    </Text>
-                    <TouchableOpacity style={ styles.edit_button }
-                                      onPress={ () => setModal(true) }
-                                      activeOpacity={ 0.7 }
+                    </AppTextRegular>
+                    <AppButton buttonStyle={ styles.edit_button }
+                               textStyle={ styles.text }
+                               onPress={ () => setModal(true) }
                     >
-                        <Text style={ styles.text }>
-                            { 'Edit' }
-                        </Text>
-                    </TouchableOpacity>
+                        <MaterialCommunityIcons name={ 'circle-edit-outline' } size={ 25 }/>
+                    </AppButton>
                 </View>
             </AppCard>
             <View style={ styles.buttons_container }>
-                <TouchableOpacity style={ styles.back_button }
-                                  onPress={ () => backToTasksList(null) }
-                                  activeOpacity={ 0.7 }
+                <AppButton buttonStyle={ styles.back_button }
+                           textStyle={ styles.text }
+                           onPress={ () => backToTasksList(null) }
                 >
-                    <Text style={ styles.text }>
-                        { 'Back' }
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={ styles.clear_button }
-                                  onPress={ () => {
-                                      removeTask(task.id);
-                                  } }
-                                  activeOpacity={ 0.7 }
+                    <AntDesign name={ 'leftcircleo' } size={ 25 }/>
+                </AppButton>
+                <AppButton buttonStyle={ styles.clear_button }
+                           textStyle={ styles.text }
+                           onPress={ () => removeTask(task.id)}
                 >
-                    <Text style={ styles.text }>
-                        { 'Delete' }
-                    </Text>
-                </TouchableOpacity>
+                    <AntDesign name={ 'minuscircleo' } size={ 25 }/>
+                </AppButton>
             </View>
         </View>
     );
 };
 
-const button = {
-    borderRadius: 10,
-    height: 40,
-    alignItems: 'center',
-    justifyContent: 'center'
-};
 
 const styles = StyleSheet.create({
     task_details: {
@@ -73,10 +63,11 @@ const styles = StyleSheet.create({
     task_title: {
         width: '100%',
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         padding: 10
     },
     title: {
-        width: '70%',
         fontSize: 24,
         marginRight: 5
     },
@@ -88,23 +79,16 @@ const styles = StyleSheet.create({
     },
     back_button: {
         width: '45%',
-        backgroundColor: THEME.GRAY_COLOR,
-        ...button
+        backgroundColor: THEME.GRAY_COLOR
     },
     clear_button: {
         width: '45%',
-        backgroundColor: THEME.RED_COLOR,
-        ...button
+        backgroundColor: THEME.RED_COLOR
     },
     edit_button: {
-        width: '30%',
-        backgroundColor: THEME.MAIN_COLOR,
-        ...button
+        backgroundColor: THEME.MAIN_COLOR
     },
     text: {
-        paddingLeft: 10,
-        paddingRight: 10,
-        textAlign: 'center',
         color: THEME.FONT_COLOR,
         fontSize: 16
     }

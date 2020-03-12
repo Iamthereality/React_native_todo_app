@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 
-export const AppTextRegular = (props) => {
+export const AppTextBold = (props) => {
     return (
         <Text style={ { ...styles.default, ...props.style } }>
             { props.children }
@@ -11,6 +11,6 @@ export const AppTextRegular = (props) => {
 
 const styles = StyleSheet.create({
     default: {
-        fontFamily: 'roboto-regular'
+        fontFamily: 'roboto-bold'
     }
 });

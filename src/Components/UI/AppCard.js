@@ -7,7 +7,7 @@ export const AppCard = (props) => {
         <View style={ styles.default }>
             { props.children }
         </View>
-    )
+    );
 };
 
 const styles = StyleSheet.create({

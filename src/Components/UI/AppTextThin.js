@@ -1,16 +1,23 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 
-export const AppTextBold = (props) => {
+import { THEME } from "../../Theme";
+
+export const AppTextThin = ({ style, children }) => {
     return (
-        <Text style={ { ...styles.default, ...props.style } }>
-            { props.children }
+        <Text style={ { ...styles.default, ...style } }>
+            { children }
         </Text>
     );
 };
 
 const styles = StyleSheet.create({
     default: {
-        fontFamily: 'roboto-bold'
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        fontFamily: 'roboto-thin',
+        color: THEME.FONT_COLOR,
+        fontSize: 16
     }
 });

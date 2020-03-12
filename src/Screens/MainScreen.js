@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, StyleSheet, FlatList, Text, Image, Animated, Easing } from 'react-native';
+import { View, StyleSheet, FlatList, Animated, Easing } from 'react-native';
+
 import { AddNewTask } from "../Components/AddNewTask";
 import { Tasks } from "../Components/Tasks";
+import { AppTextThin } from "../Components/UI/AppTextThin";
+import { THEME } from "../Theme";
 
 export const MainScreen = ({ tasks, addTask, removeTask, openTask }) => {
     let content = (
@@ -22,18 +25,16 @@ export const MainScreen = ({ tasks, addTask, removeTask, openTask }) => {
     if (tasks.length === 0) {
         const spinValue = new Animated.Value(0);
 
-        // First set up animation
         Animated.loop(Animated.timing(
             spinValue,
             {
                 toValue: 1,
-                duration: 3000,
+                duration: 9000,
                 easing: Easing.linear,
                 useNativeDriver: true
             }
         )).start();
 
-        // Second interpolate beginning and end values (in this case 0 and 1)
         const spin = spinValue.interpolate({
             inputRange: [0, 1],
             outputRange: ['360deg', '0deg']
@@ -46,9 +47,9 @@ export const MainScreen = ({ tasks, addTask, removeTask, openTask }) => {
                            source={ require('../../assets/react_icon.png') }
                     />
                 </View>
-                <Text style={ styles.greetings_text }>
+                <AppTextThin style={ styles.greetings_text }>
                     { 'Add your tasks here!' }
-                </Text>
+                </AppTextThin>
             </View>
         );
     }
@@ -86,6 +87,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     greetings_text: {
-        fontSize: 26
+        fontSize: 26,
+        color: THEME.BLACK_COLOR
     }
 });
