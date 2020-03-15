@@ -3,5 +3,6 @@ export const THEME = {
     GRAY_COLOR: '#757575',
     RED_COLOR: '#e53935',
     FONT_COLOR: '#ffffff',
-    BLACK_COLOR: '#000000'
+    BLACK_COLOR: '#000000',
+    PADDING_HORIZONTAL: 10
 };

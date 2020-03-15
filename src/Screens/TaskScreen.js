@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
 import { THEME } from '../Theme';
@@ -78,11 +78,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     back_button: {
-        width: '45%',
+        width: Dimensions.get('window').width / 2.35,
         backgroundColor: THEME.GRAY_COLOR
     },
     clear_button: {
-        width: '45%',
+        width: Dimensions.get('window').width / 2.35,
         backgroundColor: THEME.RED_COLOR
     },
     edit_button: {

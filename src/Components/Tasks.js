@@ -22,12 +22,11 @@ export const Tasks = ({ task, onRemove, onOpen }) => {
 
 const styles = StyleSheet.create({
     task: {
-        marginTop: 10,
-        marginBottom: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 10,
         borderRadius: 10,
         minHeight: 40,
         height: 'auto',
-        paddingHorizontal: 5
     },
     text: {
         alignItems: 'center',

@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, FlatList, Animated, Easing } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, FlatList, Animated, Easing, Dimensions } from 'react-native';
 
 import { AddNewTask } from "../Components/AddNewTask";
 import { Tasks } from "../Components/Tasks";
@@ -7,8 +7,21 @@ import { AppTextThin } from "../Components/UI/AppTextThin";
 import { THEME } from "../Theme";
 
 export const MainScreen = ({ tasks, addTask, removeTask, openTask }) => {
+    const [width, setWidth] = useState(Dimensions.get('window').width - THEME.PADDING_HORIZONTAL * 2);
+
+    useEffect(() => {
+        const update = () => {
+          const width = Dimensions.get('window').width - THEME.PADDING_HORIZONTAL * 2;
+          setWidth(width);
+        };
+        Dimensions.addEventListener('change', update);
+        return () => {
+          Dimensions.removeEventListener('change', update);
+        };
+    });
+
     let content = (
-        <FlatList style={ styles.tasks_list }
+        <FlatList style={ { ...styles.tasks_list, ...width } }
                   keyExtractor={ item => item.id.toString() }
                   data={ tasks }
                   renderItem={
@@ -77,7 +90,7 @@ const styles = StyleSheet.create({
         height: 300
     },
     tasks_list: {
-        paddingHorizontal: 10,
+        paddingHorizontal: THEME.PADDING_HORIZONTAL,
         marginBottom: 10
     },
     greetings: {

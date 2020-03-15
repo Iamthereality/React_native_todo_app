@@ -60,8 +60,6 @@ export const EditTaskModalWindow = ({ visibility, onCancel, value, onSave }) => 
 const styles = StyleSheet.create({
     modal_window: {
         backgroundColor: THEME.FONT_COLOR,
-        marginVertical: 10,
-        marginHorizontal: 10,
         shadowColor: '#000000',
         shadowRadius: 20,
         shadowOpacity: 0.2,
