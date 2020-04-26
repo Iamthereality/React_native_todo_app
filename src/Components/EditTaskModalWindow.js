@@ -21,6 +21,11 @@ export const EditTaskModalWindow = ({ visibility, onCancel, value, onSave }) => 
         }
     };
 
+    const cancelHandler = () => {
+        setTitle(value);
+        onCancel();
+    };
+
     return (
         <Modal visible={ visibility }
                animationtype={ 'slide' }
@@ -41,7 +46,7 @@ export const EditTaskModalWindow = ({ visibility, onCancel, value, onSave }) => 
                 <View style={ styles.buttons_container }>
                     <AppButton buttonStyle={styles.cancel_button }
                                textStyle={ styles.text }
-                               onPress={ onCancel }
+                               onPress={ cancelHandler }
                     >
                         <AntDesign name={ 'back' } size={ 25 }/>
                     </AppButton>

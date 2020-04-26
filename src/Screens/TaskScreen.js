@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 
@@ -8,11 +8,18 @@ import { EditTaskModalWindow } from "../Components/EditTaskModalWindow";
 import { AppTextRegular } from "../Components/UI/AppTextRegular";
 import { AppButton } from '../Components/UI/AppButton';
 
-export const TaskScreen = ({ backToTasksList, task, removeTask, onSave }) => {
-    const [modalWindow, setModal] = useState(false);
+import { TasksContext } from "../Context/Tasks/TasksContext";
+import { ScreenContext } from "../Context/Screen/ScreenContext";
 
-    const saveHandler = (title) => {
-        onSave(task.id, title);
+export const TaskScreen = () => {
+    const [modalWindow, setModal] = useState(false);
+    const { taskID, changeScreen } = useContext(ScreenContext);
+    const { tasks, updateTask, removeTask } = useContext(TasksContext);
+
+    const task = tasks.find((task) => task.id === taskID);
+
+    const saveHandler = async (title) => {
+        await updateTask(task.id, title);
         setModal(false);
     };
 
@@ -39,7 +46,7 @@ export const TaskScreen = ({ backToTasksList, task, removeTask, onSave }) => {
             <View style={ styles.buttons_container }>
                 <AppButton buttonStyle={ styles.back_button }
                            textStyle={ styles.text }
-                           onPress={ () => backToTasksList(null) }
+                           onPress={ () => changeScreen(null) }
                 >
                     <AntDesign name={ 'leftcircleo' } size={ 25 }/>
                 </AppButton>
@@ -54,7 +61,6 @@ export const TaskScreen = ({ backToTasksList, task, removeTask, onSave }) => {
     );
 };
 
-
 const styles = StyleSheet.create({
     task_details: {
         paddingVertical: 10,
@@ -68,6 +74,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     title: {
+        width: '60%',
         fontSize: 24,
         marginRight: 5
     },
